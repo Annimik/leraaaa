@@ -3,74 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Днем Рождения, Валерия! ❄️ Дом Уюта</title>
+    <title>С Днем Рождения, Валерия! 🏠</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Шрифт для сказок и уюта -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Merriweather:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Имитация заснеженной ночи -->
-    <div class="night-sky">
+    <div class="room">
+        <!-- Окно со снегом -->
+        <div class="window">
+            <div class="snow"></div>
+        </div>
 
-        <div class="house-container">
-            <!-- Крыша и Труба -->
-            <div class="roof"></div>
-            <div class="chimney"></div>
+        <!-- Камин (Интерактивный предмет 1) -->
+        <div class="fireplace clickable" id="item-warmth">
+            <div class="fire"></div>
+            <div class="mantel"></div>
+        </div>
 
-            <!-- Основной корпус Дома -->
-            <div class="house-body">
+        <!-- Ёлка (Интерактивный предмет 2) -->
+        <div class="tree clickable" id="item-eyes">
+            <div class="tree-layer l1"></div>
+            <div class="tree-layer l2"></div>
+            <div class="tree-layer l3"></div>
+            <div class="lights"></div>
+        </div>
 
-                <!-- Окно 1: Фокус на Глазах -->
-                <div class="window-pane" id="window-eyes">
-                    <h2>Окно в Сказочный Мир</h2>
-                    <p>Нажмите, чтобы увидеть, как сияют твои глаза!</p>
-                </div>
-
-                <!-- Окно 2: Камин и Объятия -->
-                <div class="window-pane" id="window-warmth">
-                    <h2>Тепло и Объятия</h2>
-                    <p>Загляни, чтобы почувствовать уют этого дня.</p>
-                </div>
-
-                <!-- Окно 3: Мастерская и Снеговики -->
-                <div class="window-pane" id="window-crafts">
-                    <h2>Творческая Мастерская</h2>
-                    <p>Посмотри, что мы для тебя смастерили!</p>
-                </div>
+        <!-- Диван со стикменами под пледом -->
+        <div class="sofa">
+            <div class="stickmen-group">
+                <div class="stickman s1"></div>
+                <div class="stickman s2"></div>
+                <div class="blanket"></div>
             </div>
         </div>
 
-        <!-- Модальные окна (Всплывающие поздравления) -->
-        <div id="modal-eyes" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h3>Свет Твоих Глаз</h3>
-                <p>Валерия, 7 января! В самый разгар зимних праздников ты появилась на свет, неся с собой свет, который ярче любой рождественской гирлянды.</p>
-                <p>Твои **зеленые глаза** — это как отражение весенней травы, пробившейся сквозь зимний снег. Они полны загадки, тепла и искреннего любопытства. В них видна вся твоя глубина и та самая искра, которая так притягивает. В новом году желаю, чтобы этот взгляд оставался таким же открытым и сияющим!</p>
-            </div>
+        <!-- Снеговик-игрушка (Интерактивный предмет 3) -->
+        <div class="snowman-toy clickable" id="item-crafts">
+            <div class="s-ball b1"></div>
+            <div class="s-ball b2"></div>
+            <div class="carrot"></div>
         </div>
 
-        <div id="modal-warmth" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h3>Секрет Идеального Уюта</h3>
-                <p>Мы знаем, как ты ценишь тепло и объятия. Представь: на улице снегопад, в камине весело трещат дрова, а мы с тобой — укрыты самым мягким пледом, вдыхая запах хвои и мандаринов.</p>
-                <p>Пусть в этом доме, который мы сегодня для тебя построили, всегда горит камин. Пусть тебя окружают люди, которые дарят тебе самые крепкие и нежные объятия, не отпуская. Пусть ты чувствуешь себя защищенной и любимой 365 дней в году, а не только в твой День Рождения!</p>
-                <p class="snowman-art">⛄❤️⛄</p>
+        <!-- Письмо на столике (Интерактивный предмет 4) -->
+        <div class="table">
+            <div class="letter-paper clickable" id="item-letter">
+                <div class="letter-lines"></div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-crafts" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h3>Подарки Ручной Работы</h3>
-                <p>Твоя любовь к рукоделию вдохновляет! Вдохновляясь твоими творениями, мы тоже "смастерили" тебе поздравление.</p>
-                <p>Пусть твоя мастерская всегда будет наполнена новыми идеями, нитками, красками и материалами. А твои снеговики — будь то глиняные, нарисованные или просто воображаемые — пусть станут символами твоей чистой радости и неугасающего озорства. Желаю тебе в новом году найти время для каждого своего хобби, ведь именно в них ты по-настоящему отдыхаешь душой.</p>
-                <p>С Днем Рождения, наш Мастер!</p>
-            </div>
+    <!-- Модальные окна -->
+    <div id="modal-container" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modal-body-text"></div>
         </div>
-
     </div>
 
     <script src="script.js"></script>

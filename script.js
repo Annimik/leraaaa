@@ -1,54 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const windows = [
-        { id: 'window-eyes', modalId: 'modal-eyes' },
-        { id: 'window-warmth', modalId: 'modal-warmth' },
-        { id: 'window-crafts', modalId: 'modal-crafts' }
-    ];
+const messages = {
+    'item-eyes': `
+        <h2 style="font-family: 'Caveat'">Твои глаза — это весна...</h2>
+        <p>Валерия, ты знаешь, что твои зеленые глаза напоминают хвою этой праздничной ёлки? В них столько жизни и тепла, что можно согреться даже в самый лютый мороз 7 января. Пусть твой взгляд всегда сияет счастьем!</p>
+    `,
+    'item-warmth': `
+        <h2 style="font-family: 'Caveat'">Тепло и уют</h2>
+        <p>Для той, кто любит объятия: пусть этот камин символизирует тепло близких людей. Мы желаем тебе, чтобы каждый вечер был таким же уютным, как под этим пледом, а рядом всегда был тот, кто готов тебя обнять.</p>
+    `,
+    'item-crafts': `
+        <h2 style="font-family: 'Caveat'">Магия своими руками</h2>
+        <p>Снеговики и поделки — это твоя суперсила! Ты умеешь создавать миры из ничего. Пусть в новом году вдохновение не покидает тебя, а каждая твоя работа становится маленьким шедевром.</p>
+    `,
+    'item-letter': `
+        <h2 style="font-family: 'Caveat'">Письмо для Леры</h2>
+        <div style="text-align: left; line-height: 1.6;">
+            <p>Дорогая Валерия! Сегодня, 7 января, когда мир замер в праздничном спокойствии, я пишу тебе это длинное письмо...</p>
+            <p>Ты — удивительный человек. Твоё умение видеть красоту в мелочах, будь то идеально слепленный снеговик или уютный плед, делает тебя особенной. В этот день рождения я хочу пожелать тебе бесконечного потока вдохновения. Рукоделие — это не просто хобби, это способ твоего общения с миром, и этот мир отвечает тебе взаимностью.</p>
+            <p>Твои зеленые глаза... в них можно утонуть, как в летнем лесу. Они полны доброты. Я желаю, чтобы в них никогда не гасла та искорка любопытства, которая заставляет тебя пробовать новое, мастерить и творить.</p>
+            <p>Ты любишь тепло и объятия — и это самое прекрасное человеческое качество. В мире, где всё бежит куда-то, ты умеешь ценить момент остановки, момент нежности. Пусть в твоей жизни будет как можно больше людей, которые понимают ценность простых объятий без слов.</p>
+            <p>Представь, что этот дом на экране — твой собственный уголок силы. Здесь всегда горит камин, здесь всегда ждут друзья, и здесь всегда есть место для твоего творчества. Пусть каждый твой день в новом году жизни будет похож на добрую сказку, которую ты сама же и создаешь.</p>
+            <p>Мы подготовили для тебя много слов, но даже их не хватит, чтобы описать, насколько ты важна. Пусть этот год принесет тебе яркие путешествия, новые материалы для твоих поделок и море искреннего смеха.</p>
+            <p>С днем рождения! Будь самой счастливой, люби и будь любима, твори и радуй нас своим светом!</p>
+            <p><i>(Продолжай скроллить, если хочешь, чтобы пожелания никогда не кончались...)</i></p>
+            <p>Пусть каждый стежок твоей жизни будет ровным, а каждая мечта — исполненной. Мы всегда рядом, в этом теплом виртуальном доме и в реальности.</p>
+            <p>С любовью и нежностью, в твой прекрасный день 7 января!</p>
+        </div>
+    `
+};
 
-    const modals = {};
-    const closeButtons = {};
+const modal = document.getElementById('modal-container');
+const modalBody = document.getElementById('modal-body-text');
+const closeBtn = document.querySelector('.close-btn');
 
-    // 1. Получение ссылок на элементы
-    windows.forEach(item => {
-        modals[item.id] = document.getElementById(item.modalId);
-        closeButtons[item.id] = modals[item.id].querySelector('.close-button');
+document.querySelectorAll('.clickable').forEach(item => {
+    item.addEventListener('click', () => {
+        const id = item.id;
+        modalBody.innerHTML = messages[id];
+        modal.classList.remove('hidden');
     });
+});
 
-    // 2. Функция для открытия модала
-    function openModal(modalElement) {
-        modalElement.classList.remove('hidden');
-        // Блокируем прокрутку основного тела, пока открыто модальное окно
-        document.body.style.overflow = 'hidden';
+closeBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.add('hidden');
     }
-
-    // 3. Функция для закрытия модала
-    function closeModal(modalElement) {
-        modalElement.classList.add('hidden');
-        document.body.style.overflow = 'auto'; // Возвращаем прокрутку
-    }
-
-    // 4. Назначение обработчиков кликов на окна дома
-    windows.forEach(item => {
-        const windowElement = document.getElementById(item.id);
-        const modalElement = modals[item.id];
-
-        windowElement.addEventListener('click', () => {
-            openModal(modalElement);
-        });
-
-        // Обработчик закрытия по крестику
-        closeButtons[item.id].addEventListener('click', () => {
-            closeModal(modalElement);
-        });
-    });
-
-    // 5. Закрытие по клику вне модального окна
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            // Проверяем, был ли клик сделан непосредственно на фоне модала, а не на его содержимом
-            if (e.target.classList.contains('modal')) {
-                closeModal(modal);
-            }
-        });
-    });
 });
